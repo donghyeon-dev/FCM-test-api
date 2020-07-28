@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +31,8 @@ public class NotificationController {
     * /send 로 접속하여 동작이 실행되게 한다
     * firebase project의 server key를 가지고 디바이스 토큰으로 알림을 json 데이터 형식으로 firbase에게 요청
     * */
+
+//    @Scheduled(fixedRate = 5000) //5초
     @GetMapping(value ="/send")
     public @ResponseBody
     ResponseEntity<String> send() throws JsonEOFException, InterruptedException, UnsupportedEncodingException {
