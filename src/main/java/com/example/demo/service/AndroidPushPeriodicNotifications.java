@@ -24,6 +24,9 @@ public class AndroidPushPeriodicNotifications {
     public static String PeriodicNotificationJson() throws JsonEOFException, UnsupportedEncodingException {
         LocalDate localDate = LocalDate.now();
 
+        String sendTitle = "안녕하세용";
+        String sendBody ="오늘은 " + localDate.getDayOfWeek().name()+"입니다.";
+
         String sampleData[] = {"d99ZwMPsMbs:APA91bElq2EM1r9gwr3UePWzMcwo9r3LcxzfBcllN2SiwL4WlWBD_LFL_ip8TEhcKj3eVRUKFVbbLbqhmM7KANFnZq4yI_YTi3cmdyv9tfGX85CUMCmDJgwdB5RyCHFVZcdAIz0erJ7T"
                 ,"device token value 2","device token value 3"};
 
@@ -44,8 +47,8 @@ public class AndroidPushPeriodicNotifications {
         body.put("registration_ids",array);
 
         JSONObject notification = new JSONObject();
-        notification.put("title", URLEncoder.encode("안녕하세용","UTF-8"));
-        notification.put("body",URLEncoder.encode("오늘은 " + localDate.getDayOfWeek().name()+"입니다.", "UTF-8"));
+        notification.put("title", URLEncoder.encode(sendTitle,"UTF-8"));
+        notification.put("body",URLEncoder.encode(sendBody, "UTF-8"));
 
         body.put("notification",notification);
 
