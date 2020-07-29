@@ -11,6 +11,7 @@ import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AndroidPushPeriodicNotifications {
 
@@ -21,14 +22,14 @@ public class AndroidPushPeriodicNotifications {
     * 현재는 sample data로 하드코딩
     *
     */
-    public static String PeriodicNotificationJson() throws JsonEOFException, UnsupportedEncodingException {
+    public static String PeriodicNotificationJson(Map<String, String> params) throws JsonEOFException, UnsupportedEncodingException {
         LocalDate localDate = LocalDate.now();
 
-        String sendTitle = "안녕하세용";
-        String sendBody ="오늘은 " + localDate.getDayOfWeek().name()+"입니다.";
+        String sendTitle = String.valueOf(params.get("title"));
+        String sendBody =String.valueOf(params.get("body"));
 
         String sampleData[] = {"d99ZwMPsMbs:APA91bElq2EM1r9gwr3UePWzMcwo9r3LcxzfBcllN2SiwL4WlWBD_LFL_ip8TEhcKj3eVRUKFVbbLbqhmM7KANFnZq4yI_YTi3cmdyv9tfGX85CUMCmDJgwdB5RyCHFVZcdAIz0erJ7T"
-                ,"device token value 2","device token value 3"};
+                ,"cF2278_xj8c:APA91bHl6G0WCeQA-tU9QqZvoQYfLNcbvbCbxt0diuYrTyziOol0DZgdY-e_9vhrfHuuJYq8Y3UY_6mNKmtaTwax0__4kVurNI0xKHAdlUeQHWeqvERg9I7xmzFDJKquQALDqQZkutO6","device token value 3"};
 
         JSONObject body = new JSONObject();
 
@@ -48,10 +49,11 @@ public class AndroidPushPeriodicNotifications {
 
         JSONObject notification = new JSONObject();
         notification.put("title", URLEncoder.encode(sendTitle,"UTF-8"));
-        notification.put("body",URLEncoder.encode(sendBody, "UTF-8"));
+        notification.put("body", URLEncoder.encode(sendBody,"UTF-8"));
+        notification.put("click_action",".MainActivity");
+
 
         body.put("notification",notification);
-
         System.out.println(body.toString());
 
         return body.toString();

@@ -10,12 +10,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -33,10 +32,15 @@ public class NotificationController {
     * */
 
 //    @Scheduled(fixedRate = 5000) //5초
-    @GetMapping(value ="/send")
+    @GetMapping(value ="/send", produces = "application/json;")
     public @ResponseBody
-    ResponseEntity<String> send() throws JsonEOFException, InterruptedException, UnsupportedEncodingException {
-        String notifications = AndroidPushPeriodicNotifications.PeriodicNotificationJson();
+    ResponseEntity<String> send(@RequestParam("sendTitle") String title, @RequestParam("sendBody") String body) throws JsonEOFException, InterruptedException, UnsupportedEncodingException {
+
+        logger.debug("Titls is [{}], Body is [{}]",title,body);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("title",title);
+        map.put("body",body);
+        String notifications = AndroidPushPeriodicNotifications.PeriodicNotificationJson(map);
 
         HttpEntity<String> request = new HttpEntity<>(notifications);
 
