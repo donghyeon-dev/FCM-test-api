@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 30초마다 설정 파일의 변경을 확인한다. 파일이 변경되면 다시 로딩한다 -->
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- default(설정 안되어 있으면 default), 로컬환경이라면 -->
+    <springProfile name="default">
+        <logger name="java.sql.Connection" level="debug" />
+        <logger name="java.sql.Statement" level="info" />
+        <logger name="java.sql.PreparedStatement" level="debug" />
+        <logger name="java.sql.ResultSet" level="info" />
+        <logger name="org.springframework" level="info" />
+        <logger name="io.undertow.request" level="debug" />
+        <logger name="com.zaxxer.hikari" level="debug" />
+        <logger name="kr.co.starlabs" level="debug" />
+        <root level="debug">
+            <appender-ref ref="console" />
+        </root>
+    </springProfile>
+
+</configuration>
