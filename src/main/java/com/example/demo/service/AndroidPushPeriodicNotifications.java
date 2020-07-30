@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -34,26 +35,22 @@ public class AndroidPushPeriodicNotifications {
         JSONObject body = new JSONObject();
 
         // 알림을 보낼 디바이스의 디바이스토큰을 넣는 list(registration_ids의 값으로 들어간다)
-        List<String> tokenlist = new ArrayList<String>();
 
-        for(int i = 0; i< sampleData.length; i++){
-            tokenlist.add(sampleData[i]);
-        }
-
+        List<String> tokenlist = new ArrayList<String>(Arrays.asList(sampleData));
         JSONArray array = new JSONArray();
 
-        for(int i =0; i < tokenlist.size();i++){
-            array.put(tokenlist.get(i));
+        for (String s : tokenlist) {
+            array.put(s);
         }
         body.put("registration_ids",array);
 
         JSONObject notification = new JSONObject();
         notification.put("title", URLEncoder.encode(sendTitle,"UTF-8"));
         notification.put("body", URLEncoder.encode(sendBody,"UTF-8"));
-        notification.put("click_action",".MainActivity");
+        notification.put("channel_id","Notice");
 
 
-        body.put("notification",notification);
+        body.put("data",notification);
         System.out.println(body.toString());
 
         return body.toString();
