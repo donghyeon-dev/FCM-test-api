@@ -29,8 +29,7 @@ public class AndroidPushPeriodicNotifications {
         String sendTitle = String.valueOf(params.get("title"));
         String sendBody =String.valueOf(params.get("body"));
 
-        String sampleData[] = {"d99ZwMPsMbs:APA91bElq2EM1r9gwr3UePWzMcwo9r3LcxzfBcllN2SiwL4WlWBD_LFL_ip8TEhcKj3eVRUKFVbbLbqhmM7KANFnZq4yI_YTi3cmdyv9tfGX85CUMCmDJgwdB5RyCHFVZcdAIz0erJ7T"
-                ,"cF2278_xj8c:APA91bHl6G0WCeQA-tU9QqZvoQYfLNcbvbCbxt0diuYrTyziOol0DZgdY-e_9vhrfHuuJYq8Y3UY_6mNKmtaTwax0__4kVurNI0xKHAdlUeQHWeqvERg9I7xmzFDJKquQALDqQZkutO6","device token value 3"};
+        String sampleData[] = {"deviceToken,deviceToken2,deviceToken3"};
 
         JSONObject body = new JSONObject();
 
